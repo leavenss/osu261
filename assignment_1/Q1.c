@@ -8,6 +8,7 @@
 #include<stdlib.h>
 #include<math.h>
 #include<time.h>
+#include <stdbool.h>
 
 struct student{
     int id;
@@ -21,12 +22,39 @@ struct student* allocate(){
     return myStudents;
 }
 
+bool isUniqueInArray(int idArray[10], int elementsInArray, int compareNum){
+
+    int i, j;
+
+    //Selection sort
+    for (i=0; i < elementsInArray; i++){
+        int index_of_min = i;
+        for(j=i; j < elementsInArray; j++){
+            if(idArray[index_of_min] > idArray[j]) {
+                index_of_min = j;
+            }
+        }
+        int temp = idArray[i];
+        idArray[i] = idArray[index_of_min];
+        idArray[index_of_min] = temp;
+    }
+
+    //Linear search
+    for (i=0; i < elementsInArray; i++){
+        printf("%d vs %d\n"), idArray[i], compareNum;
+        if (idArray[i] != compareNum){
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
 void generate(struct student* students){
     /*Generate random and unique ID and scores for ten students, ID being between 1 and 10, scores between 0 and 100*/
     int IDMAX = 10;
     int SCOREMAX = 100;
     int i;
-    int j;
     int elementsInArray = 0;
     int newRandomNum;
     time_t t;
@@ -37,30 +65,17 @@ void generate(struct student* students){
     //Generate a  random number and add it to the array.
     for (i=0; i < 10; i++) {
         newRandomNum = rand() % (IDMAX+1);
-        idArray[elementsInArray] = newRandomNum;
-        elementsInArray++;
-
-        //Selection sort
-        for (i=0; i < elementsInArray; i++){
-            int index_of_min = i;
-            for(int j=i; j < elementsInArray; j++){
-                if(idArray[index_of_min] > idArray[j]) {
-                    index_of_min = j;
-                }
-            }
-            int temp = idArray[i];
-            idArray[i] = idArray[index_of_min];
-            idArray[index_of_min] = temp;
+        printf("newRandomNum is %d\n Unique? %d\n",newRandomNum, isUniqueInArray(idArray, 10, newRandomNum));
+        if (isUniqueInArray(idArray, 10, newRandomNum) == true){
+            idArray[elementsInArray] = newRandomNum;
+            elementsInArray++;
         }
-
-    }
-    //TODO - Add a check that no duplicate ids exist
-
-    //TODO - Remove this
-    for (i=0; i < 10; i++) {
-        printf("%d\n", idArray[i]);
     }
 
+    printf("Here's the array:\n");
+    for (i=0; i < elementsInArray; i++) {
+        printf("%d ", idArray[i]);
+    }
 }
 
 void output(struct student* students){
