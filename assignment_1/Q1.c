@@ -1,12 +1,13 @@
 /* CS261- Assignment 1 - Q.1*/
-/* Name:
- * Date:
+/* Name: Taylor Liss
+ * Date: 9/22/17
  * Solution description:
  */
 
 #include <stdio.h>
 #include<stdlib.h>
 #include<math.h>
+#include<time.h>
 
 struct student{
     int id;
@@ -15,12 +16,50 @@ struct student{
 
 struct student* allocate(){
     /*Allocate memory for ten students*/
-
+    struct student *myStudents = malloc(10 * sizeof(struct student));
     /*return the pointer*/
+    return myStudents;
 }
 
 void generate(struct student* students){
     /*Generate random and unique ID and scores for ten students, ID being between 1 and 10, scores between 0 and 100*/
+    int IDMAX = 10;
+    int SCOREMAX = 100;
+    int i;
+    int j;
+    int elementsInArray = 0;
+    int newRandomNum;
+    time_t t;
+    int idArray[10];
+
+    srand((unsigned) time(&t));
+
+    //Generate a  random number and add it to the array.
+    for (i=0; i < 10; i++) {
+        newRandomNum = rand() % (IDMAX+1);
+        idArray[elementsInArray] = newRandomNum;
+        elementsInArray++;
+
+        //Selection sort
+        for (i=0; i < elementsInArray; i++){
+            int index_of_min = i;
+            for(int j=i; j < elementsInArray; j++){
+                if(idArray[index_of_min] > idArray[j]) {
+                    index_of_min = j;
+                }
+            }
+            int temp = idArray[i];
+            idArray[i] = idArray[index_of_min];
+            idArray[index_of_min] = temp;
+        }
+
+    }
+    //TODO - Add a check that no duplicate ids exist
+
+    //TODO - Remove this
+    for (i=0; i < 10; i++) {
+        printf("%d\n", idArray[i]);
+    }
 
 }
 
@@ -46,8 +85,10 @@ int main(){
     struct student* stud = NULL;
 
     /*call allocate*/
+    stud = allocate();
 
     /*call generate*/
+    generate(stud);
 
     /*call output*/
 
