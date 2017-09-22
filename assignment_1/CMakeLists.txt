@@ -4,4 +4,6 @@ project(assignment_1)
 set(CMAKE_C_STANDARD 99)
 
 set(SOURCE_FILES Q0.c)
-add_executable(assignment_1 ${SOURCE_FILES})
+
+add_executable(Q0 Q0.c)
+add_executable(Q1 Q1.c)
