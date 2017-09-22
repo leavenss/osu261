@@ -39,15 +39,21 @@ bool isUniqueInArray(int idArray[10], int elementsInArray, int compareNum){
         idArray[index_of_min] = temp;
     }
 
-    //Linear search
-    for (i=0; i < elementsInArray; i++){
-        printf("%d vs %d\n"), idArray[i], compareNum;
-        if (idArray[i] != compareNum){
-            return true;
-        } else {
-            return false;
-        }
+    printf("Array inside:\n");
+    for (i=0; i < elementsInArray; i++) {
+        printf("%d ", idArray[i]);
     }
+    printf("\n");
+
+    //Linear search
+//    for (i=0; i < elementsInArray; i++){
+//        printf("%d vs %d\n"), idArray[i], compareNum;
+//        if (idArray[i] != compareNum){
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
 }
 
 void generate(struct student* students){
@@ -65,17 +71,27 @@ void generate(struct student* students){
     //Generate a  random number and add it to the array.
     for (i=0; i < 10; i++) {
         newRandomNum = rand() % (IDMAX+1);
-        printf("newRandomNum is %d\n Unique? %d\n",newRandomNum, isUniqueInArray(idArray, 10, newRandomNum));
-        if (isUniqueInArray(idArray, 10, newRandomNum) == true){
-            idArray[elementsInArray] = newRandomNum;
-            elementsInArray++;
-        }
+        bool unique = isUniqueInArray(idArray, elementsInArray, newRandomNum);
+        printf("num: %d\n", newRandomNum);
+        printf("uni: %d\n", unique);
+        printf("ele: %d\n", elementsInArray);
+//        if (isUniqueInArray(idArray, 10, newRandomNum) == true){
+//            idArray[elementsInArray] = newRandomNum;
+//            elementsInArray++;
+//        }
+        elementsInArray++;
     }
 
-    printf("Here's the array:\n");
+    printf("Array outside:\n");
     for (i=0; i < elementsInArray; i++) {
         printf("%d ", idArray[i]);
     }
+    printf("\n");
+
+//    printf("Here's the array:\n");
+//    for (i=0; i < elementsInArray; i++) {
+//        printf("%d ", idArray[i]);
+//    }
 }
 
 void output(struct student* students){
