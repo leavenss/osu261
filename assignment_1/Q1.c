@@ -22,38 +22,15 @@ struct student* allocate(){
     return myStudents;
 }
 
-bool isUniqueInArray(int idArray[10], int elementsInArray, int compareNum){
-
-    int i, j;
-
-    //Selection sort
-    for (i=0; i < elementsInArray; i++){
-        int index_of_min = i;
-        for(j=i; j < elementsInArray; j++){
-            if(idArray[index_of_min] > idArray[j]) {
-                index_of_min = j;
-            }
-        }
-        int temp = idArray[i];
-        idArray[i] = idArray[index_of_min];
-        idArray[index_of_min] = temp;
-    }
-
-    printf("Array inside:\n");
-    for (i=0; i < elementsInArray; i++) {
-        printf("%d ", idArray[i]);
-    }
-    printf("\n");
-
+bool isUniqueInArray(int idArray[10], int elementsInArray, int *compareNum){
+    bool unique = true;
     //Linear search
-//    for (i=0; i < elementsInArray; i++){
-//        printf("%d vs %d\n"), idArray[i], compareNum;
-//        if (idArray[i] != compareNum){
-//            return true;
-//        } else {
-//            return false;
-//        }
-//    }
+    for (int i=0; i < elementsInArray; i++){
+        if (idArray[i] == *compareNum){
+            unique = false;
+        }
+    }
+    return unique; // if its the first item in the array
 }
 
 void generate(struct student* students){
@@ -70,28 +47,17 @@ void generate(struct student* students){
 
     //Generate a  random number and add it to the array.
     for (i=0; i < 10; i++) {
-        newRandomNum = rand() % (IDMAX+1);
-        bool unique = isUniqueInArray(idArray, elementsInArray, newRandomNum);
-        printf("num: %d\n", newRandomNum);
-        printf("uni: %d\n", unique);
-        printf("ele: %d\n", elementsInArray);
-//        if (isUniqueInArray(idArray, 10, newRandomNum) == true){
-//            idArray[elementsInArray] = newRandomNum;
-//            elementsInArray++;
-//        }
-        elementsInArray++;
+        newRandomNum = (rand() % IDMAX)+1;
+        while(isUniqueInArray(idArray, i, &newRandomNum) == false){
+            newRandomNum = (rand() % IDMAX)+1;
+        }
+        idArray[i] = newRandomNum;
     }
-
-    printf("Array outside:\n");
-    for (i=0; i < elementsInArray; i++) {
+    printf("Array is:\n");
+    for (i=0; i < IDMAX; i++) {
         printf("%d ", idArray[i]);
     }
     printf("\n");
-
-//    printf("Here's the array:\n");
-//    for (i=0; i < elementsInArray; i++) {
-//        printf("%d ", idArray[i]);
-//    }
 }
 
 void output(struct student* students){
