@@ -38,14 +38,14 @@ void generate(struct student* students){
     int IDMAX = 10;
     int SCOREMAX = 100;
     int i;
-    int elementsInArray = 0;
     int newRandomNum;
     time_t t;
     int idArray[10];
+    int scoreArray[10];
 
     srand((unsigned) time(&t));
 
-    //Generate a  random number and add it to the array.
+    //Generate 10 unique ID numbers between 1 and 10 inclusive
     for (i=0; i < 10; i++) {
         newRandomNum = (rand() % IDMAX)+1;
         while(isUniqueInArray(idArray, i, &newRandomNum) == false){
@@ -53,11 +53,21 @@ void generate(struct student* students){
         }
         idArray[i] = newRandomNum;
     }
-    printf("Array is:\n");
-    for (i=0; i < IDMAX; i++) {
-        printf("%d ", idArray[i]);
+
+    //Generate 10 unique scores between 1 and 100 inclusive
+    for (i=0; i < 10; i++) {
+        newRandomNum = rand() % (SCOREMAX+1);
+        while(isUniqueInArray(scoreArray, i, &newRandomNum) == false){
+            newRandomNum = (rand() % SCOREMAX)+1;
+        }
+        scoreArray[i] = newRandomNum;
     }
-    printf("\n");
+
+//    printf("Array is:\n");
+//    for (i=0; i < 10; i++) {
+//        printf("%d ", scoreArray[i]);
+//    }
+//    printf("\n");
 }
 
 void output(struct student* students){
