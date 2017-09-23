@@ -10,6 +10,8 @@
 #include<time.h>
 #include <stdbool.h>
 
+int NUMOFSTUDENTS = 10;
+
 struct student{
     int id;
     int score;
@@ -22,7 +24,7 @@ struct student* allocate(){
     return myStudents;
 }
 
-bool isUniqueInArray(int idArray[10], int elementsInArray, int *compareNum){
+bool isUniqueInArray(const int *idArray, int elementsInArray, const int *compareNum){
     bool unique = true;
     //Linear search
     for (int i=0; i < elementsInArray; i++){
@@ -37,6 +39,7 @@ void generate(struct student* students){
     /*Generate random and unique ID and scores for ten students, ID being between 1 and 10, scores between 0 and 100*/
     int IDMAX = 10;
     int SCOREMAX = 100;
+    int NUMSTUDENTS = 10;
     int i;
     int newRandomNum;
     time_t t;
@@ -45,29 +48,18 @@ void generate(struct student* students){
 
     srand((unsigned) time(&t));
 
-    //Generate 10 unique ID numbers between 1 and 10 inclusive
-    for (i=0; i < 10; i++) {
+    //Generate 10 unique ID numbers between 1 and 10 inclusive and 10 random scores between 0 and 100 inclusive
+    for (i=0; i < NUMOFSTUDENTS; i++) {
         newRandomNum = (rand() % IDMAX)+1;
         while(isUniqueInArray(idArray, i, &newRandomNum) == false){
             newRandomNum = (rand() % IDMAX)+1;
         }
         idArray[i] = newRandomNum;
-    }
-
-    //Generate 10 unique scores between 1 and 100 inclusive
-    for (i=0; i < 10; i++) {
         newRandomNum = rand() % (SCOREMAX+1);
-        while(isUniqueInArray(scoreArray, i, &newRandomNum) == false){
-            newRandomNum = (rand() % SCOREMAX)+1;
-        }
         scoreArray[i] = newRandomNum;
+        students[i].id = idArray[i];
+        students[i].score = scoreArray[i];
     }
-
-//    printf("Array is:\n");
-//    for (i=0; i < 10; i++) {
-//        printf("%d ", scoreArray[i]);
-//    }
-//    printf("\n");
 }
 
 void output(struct student* students){
@@ -77,6 +69,9 @@ void output(struct student* students){
              ID3 score3
              ...
              ID10 score10*/
+    for (int i = 0; i < NUMOFSTUDENTS; i++){
+        printf("%d, %d\n", students[i].id, students[i].score);
+    }
 }
 
 void summary(struct student* students){
@@ -98,6 +93,7 @@ int main(){
     generate(stud);
 
     /*call output*/
+    output(stud);
 
     /*call summary*/
 
