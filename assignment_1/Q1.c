@@ -1,7 +1,9 @@
 /* CS261- Assignment 1 - Q.1*/
 /* Name: Taylor Liss
  * Date: 9/22/17
- * Solution description:
+ * Solution description: This program generates an array of 10 students with random unique id numbers from 1 to 10
+ * inclusive and scores from 0 to 100. It then displays those ids and scores, and the average, highest, and lowest
+ * scores.
  */
 
 #include <stdio.h>
@@ -70,7 +72,7 @@ void output(struct student* students){
              ...
              ID10 score10*/
     for (int i = 0; i < NUMOFSTUDENTS; i++){
-        printf("%d, %d\n", students[i].id, students[i].score);
+        printf("%3d\t%3d\n", students[i].id, students[i].score);
     }
 }
 
@@ -93,11 +95,12 @@ void summary(struct student* students){
 
     printf("Lowest score is: %d\n", minimum);
     printf("Highest score is: %d\n", maximum);
-    printf("Average score is: %f\n", average);
+    printf("Average score is: %.2f\n", average);
 }
 
 void deallocate(struct student* stud){
     /*Deallocate memory from stud*/
+    free(stud);
 }
 
 int main(){
