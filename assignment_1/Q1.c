@@ -11,6 +11,7 @@
 #include<math.h>
 #include<time.h>
 #include <stdbool.h>
+#include <assert.h>
 
 int NUMOFSTUDENTS = 10;
 
@@ -41,12 +42,11 @@ void generate(struct student* students){
     /*Generate random and unique ID and scores for ten students, ID being between 1 and 10, scores between 0 and 100*/
     int IDMAX = 10;
     int SCOREMAX = 100;
-    int NUMSTUDENTS = 10;
     int i;
     int newRandomNum;
     time_t t;
-    int idArray[10];
-    int scoreArray[10];
+    int idArray[NUMOFSTUDENTS];
+    int scoreArray[NUMOFSTUDENTS];
 
     srand((unsigned) time(&t));
 
@@ -100,6 +100,7 @@ void summary(struct student* students){
 
 void deallocate(struct student* stud){
     /*Deallocate memory from stud*/
+    assert (stud != NULL);
     free(stud);
 }
 
@@ -108,6 +109,8 @@ int main(){
 
     /*call allocate*/
     stud = allocate();
+
+    assert(stud != 0);
 
     /*call generate*/
     generate(stud);
