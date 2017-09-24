@@ -7,3 +7,4 @@ set(SOURCE_FILES Q0.c)
 
 add_executable(Q0 Q0.c)
 add_executable(Q1 Q1.c)
+add_executable(Q2 Q2.c)
