@@ -15,10 +15,10 @@
 void sort(int* number, int n){
     /*Sort the given array number , of length n*/
     //Selection sort
-    int i;
+    int i, j;
     for (i=0; i < n; i++){
         int index_of_min = i;
-        for(int j=i; j < n; j++){
+        for(j=i; j < n; j++){
             if(number[index_of_min] > number[j]) {
                 index_of_min = j;
             }

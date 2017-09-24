@@ -19,10 +19,11 @@ struct student{
 };
 
 void sort(struct student* students, int n){
+    int i, j;
     /*Sort the n students based on their score*/
-    for (int i = 0; i < n; i++){
+    for (i = 0; i < n; i++){
         int index_of_min = i;
-        for(int j=i; j < n; j++){
+        for(j=i; j < n; j++){
             if(students[index_of_min].score > students[j].score) {
                 index_of_min = j;
             }
@@ -35,9 +36,10 @@ void sort(struct student* students, int n){
 
 /*Function to determine if an ID number is unique in an array.*/
 bool isUniqueInArray(const int *idArray, int elementsInArray, const int *compareNum){
+    int i;
     bool unique = true;
     //Linear search
-    for (int i=0; i < elementsInArray; i++){
+    for (i=0; i < elementsInArray; i++){
         if (idArray[i] == *compareNum){
             unique = false;
         }
@@ -77,7 +79,7 @@ int main(){
 
     /*Print the contents of the array of n students.*/
     printf("Unsorted:\n");
-    for (int i = 0; i < n; i++){
+    for (i = 0; i < n; i++){
         printf("%3d\t%3d\n", myStudents[i].id, myStudents[i].score);
     }
     printf("\n");
@@ -87,7 +89,7 @@ int main(){
 
     /*Print the contents of the array of n students.*/
     printf("Sorted:\n");
-    for (int i = 0; i < n; i++){
+    for (i = 0; i < n; i++){
         printf("%3d\t%3d\n", myStudents[i].id, myStudents[i].score);
     }
 

@@ -29,9 +29,10 @@ struct student* allocate(){
 
 /*Function to determine if an ID number is unique in an array*/
 bool isUniqueInArray(const int *idArray, int elementsInArray, const int *compareNum){
+    int i;
     bool unique = true;
     //Linear search
-    for (int i=0; i < elementsInArray; i++){
+    for (i=0; i < elementsInArray; i++){
         if (idArray[i] == *compareNum){
             unique = false;
         }
@@ -66,24 +67,26 @@ void generate(struct student* students){
 }
 
 void output(struct student* students){
+    int i;
     /*Output information about the ten students in the format:
              ID1 Score1
              ID2 score2
              ID3 score3
              ...
              ID10 score10*/
-    for (int i = 0; i < NUMOFSTUDENTS; i++){
+    for (i = 0; i < NUMOFSTUDENTS; i++){
         printf("%3d\t%3d\n", students[i].id, students[i].score);
     }
 }
 
 void summary(struct student* students){
     /*Compute and print the minimum, maximum and average scores of the ten students*/
+    int i;
     int minimum = 100;
     int maximum = 0;
     float average = 0;
 
-    for (int i = 0; i < NUMOFSTUDENTS; i++){
+    for (i = 0; i < NUMOFSTUDENTS; i++){
         if (students[i].score < minimum){
             minimum = students[i].score;
         }

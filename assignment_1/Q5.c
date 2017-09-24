@@ -19,8 +19,9 @@ char toLowerCase(char ch){
 }
 
 void sticky(char* word){
+    int i;
     /*Convert to sticky caps*/
-    for (int i=0; i<20; i++){
+    for (i=0; i<20; i++){
         if (i % 2 == 0 && word[i] >= 'a' && word[i] <= 'z') { //if the character is odd and lowercase
             word[i] = toUpperCase(word[i]);
         } else if (i % 2 == 1 && word[i] >= 'A' && word[i] <= 'Z'){
@@ -44,7 +45,7 @@ int main(){
     sticky(myString);
 
     /*Print the new word*/
-    printf("%s", myString);
+    printf("%s\n", myString);
 
     return 0;
 }
