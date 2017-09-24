@@ -27,6 +27,7 @@ struct student* allocate(){
     return myStudents;
 }
 
+/*Function to determine if an ID number is unique in an array*/
 bool isUniqueInArray(const int *idArray, int elementsInArray, const int *compareNum){
     bool unique = true;
     //Linear search
