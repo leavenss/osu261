@@ -1,7 +1,8 @@
 /* CS261- Assignment 1 - Q.5*/
-/* Name:
- * Date:
- * Solution description:
+/* Name: Taylor Liss
+ * Date: 9/24/17
+ * Solution description: This program asks the user to input a word and then returns the word in sticky caps. It can
+ * accept a word up to 20 characters long.
  */
 
 #include <stdio.h>
@@ -20,13 +21,13 @@ char toLowerCase(char ch){
 void sticky(char* word){
     /*Convert to sticky caps*/
     for (int i=0; i<20; i++){
-        if (i % 2 == 1 && word[i] >= 'a' && word[i] <= 'z') {
-            printf("Running toUpper\n");
+        if (i % 2 == 0 && word[i] >= 'a' && word[i] <= 'z') { //if the character is odd and lowercase
             word[i] = toUpperCase(word[i]);
-        } else if (i % 2 == 0 && word[i] >= 'A' && word[i] <= 'Z'){
-            printf("Running toLower\n");
+        } else if (i % 2 == 1 && word[i] >= 'A' && word[i] <= 'Z'){
             word[i] = toLowerCase(word[i]);
-        } else if (i % 2 == 0 || i % 2 == 1) { //Todo fix this statement
+        } else if (i % 2 == 0 && word[i] >= 'A' && word[i] <= 'Z'
+                   || i % 2 == 1 && word[i] >= 'a' && word[i] <= 'z') {
+            continue;
         } else {
             break;
         }
@@ -36,6 +37,7 @@ void sticky(char* word){
 int main(){
     /*Read word from the keyboard using scanf*/
     char myString[20];
+    printf("Enter a word up to 20 characters long:\n");
     scanf("%s", myString);
 
     /*Call sticky*/
