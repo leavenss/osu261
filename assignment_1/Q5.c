@@ -26,8 +26,8 @@ void sticky(char* word){
             word[i] = toUpperCase(word[i]);
         } else if (i % 2 == 1 && word[i] >= 'A' && word[i] <= 'Z'){
             word[i] = toLowerCase(word[i]);
-        } else if (i % 2 == 0 && word[i] >= 'A' && word[i] <= 'Z'
-                   || i % 2 == 1 && word[i] >= 'a' && word[i] <= 'z') {
+        } else if ((i % 2 == 0 && word[i] >= 'A' && word[i] <= 'Z')
+                   || (i % 2 == 1 && word[i] >= 'a' && word[i] <= 'z')) {
             continue;
         } else {
             break;
