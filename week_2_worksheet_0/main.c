@@ -1,8 +1,21 @@
 #include <stdio.h>
-#include <arrayBagStack.h>
+#include <stdlib.h>
+#include "arrayBagStack.h"
+
+struct arrayBagStack {
+    TYPE data [100];
+    int count;
+};
+
+struct arrayBagStack * createArray()
+{
+    struct arrayBagStack * b = malloc(sizeof(struct arrayBagStack));
+
+    return b;
+}
 
 void initArray (struct arrayBagStack * b){
-
+    b->count=0;
 }
 
 void addArray(struct arrayBagStack * b, TYPE v){};
