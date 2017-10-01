@@ -42,7 +42,7 @@ void removeArray(struct arrayBagStack * b, TYPE v) {
     for (j = i; j < b->count-1; j++){
         b->data[j] = b->data[j + 1];
     }
-    b->count=b->count-1;
+    b->count = b->count-1;
 };
 
 int sizeArray(struct arrayBagStack * b){
@@ -75,8 +75,6 @@ void printArray(struct arrayBagStack *b){
 }
 
 int main() {
-    printf("Hello, World!\n");
-
     //d is a pointer to an arrayBagStack struct
     struct arrayBagStack *myBag;
     myBag = createArray();
@@ -85,15 +83,15 @@ int main() {
     addArray(myBag, 7);
 
     int myNum = 8;
-    printf("Does myBag contain %d?\n", myNum);
+    printf("Does myBag contain %d: ", myNum);
     if(containsArray(myBag, myNum) == 1){
         printf("Yes");
     } else {
         printf("No");
     }
-
-    //printArray(myBag);
-
+    printf("\nSize of myBag is: %d\n", sizeArray(myBag));
+    removeArray(myBag, myNum);
+    printf("\nAfter removing myNum, size of myBag is: %d\n", sizeArray(myBag));
 
     return 0;
 }
