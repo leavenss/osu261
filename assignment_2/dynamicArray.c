@@ -252,6 +252,8 @@ int isEmptyDynArr(DynArr *v)
 void pushDynArr(DynArr *v, TYPE val)
 {
 	/* FIXME: You will write this function */
+	assert(v!=0);
+	addDynArr(v, val);
 }
 
 /*	Returns the element at the top of the stack 
@@ -264,9 +266,10 @@ void pushDynArr(DynArr *v, TYPE val)
 TYPE topDynArr(DynArr *v)
 {
 	/* FIXME: You will write this function */
-	
+	assert(v!=0);
+	assert(!isEmptyDynArr(v));
+	return v->data[v->size-1];
 	/* FIXME: You will change this return value*/
-	return 1;
 }
 
 /* Removes the element on top of the stack 
@@ -280,6 +283,9 @@ TYPE topDynArr(DynArr *v)
 void popDynArr(DynArr *v)
 {
 	/* FIXME: You will write this function */
+	assert(v!=0);
+	assert(!isEmptyDynArr(v));
+	v->size--;
 }
 
 /* ************************************************************************
@@ -300,10 +306,16 @@ void popDynArr(DynArr *v)
 int containsDynArr(DynArr *v, TYPE val)
 {
 	/* FIXME: You will write this function */
-	
+	assert(v!=0);
+	assert(!isEmptyDynArr(v));
+	int i;
+	for (i = 0; i < v->size;i++) {
+		if (v->data[i] == val) {
+			return 1;
+		}
+	}
+	return 0;
 	/* FIXME:  You will change this return value */
-	return 1;
-
 }
 
 /*	Removes the first occurrence of the specified value from the collection
