@@ -166,6 +166,9 @@ TYPE getDynArr(DynArr *v, int pos)
 void putDynArr(DynArr *v, int pos, TYPE val)
 {
 	/* FIXME: You will write this function */
+	assert(v!=0);
+	assert(!isEmptyDynArr(v));
+	v->data[pos] = val;
 }
 
 /*	Swap two specified elements in the dynamic array

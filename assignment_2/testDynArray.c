@@ -33,7 +33,7 @@ int main(int argc, char* argv[]){
 	addDynArr(dyn, 5);
 	addDynArr(dyn, 6);
 	
-	printf("The array's content: [3,4,10,5,6]\n");
+	printf("The array's content should be: [3,4,10,5,6]\n");
 	assertTrue(EQ(getDynArr(dyn, 0), 3), "Test 1st element == 3");
 	assertTrue(EQ(getDynArr(dyn, 1), 4), "Test 2nd element == 4");
 	assertTrue(EQ(getDynArr(dyn, 2), 10), "Test 3rd element == 10");
