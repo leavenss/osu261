@@ -92,6 +92,13 @@ void deleteDynArr(DynArr *v)
 void _dynArrSetCapacity(DynArr *v, int newCap)
 {	
 	/* FIXME: You will write this function */
+    struct DynArr myNewData;
+    initDynArr(&myNewData, newCap);
+    for (int a = 0; a < v->size; a++) {
+        addDynArr(&myNewData, v->data[a]);
+    }
+    freeDynArr(v);
+    *v = myNewData;
 	
 }
 
@@ -119,7 +126,10 @@ int sizeDynArr(DynArr *v)
 void addDynArr(DynArr *v, TYPE val)
 {
 	/* FIXME: You will write this function */
-
+	if(v->size >= v->capacity)
+		_dynArrSetCapacity(v, 2 * v->capacity);
+	v->data[v->size] = val;
+	v->size++;
 }
 
 /*	Get an element from the dynamic array from a specified position
@@ -136,9 +146,10 @@ void addDynArr(DynArr *v, TYPE val)
 TYPE getDynArr(DynArr *v, int pos)
 {
 	/* FIXME: You will write this function */
-
+	assert(v!=0);
+	assert(!isEmptyDynArr(v));
+	return v->data[pos];
 	/* FIXME: you must change this return value */
-	return 1; 
 }
 
 /*	Put an item into the dynamic array at the specified location,
@@ -204,9 +215,11 @@ void removeAtDynArr(DynArr *v, int idx)
 int isEmptyDynArr(DynArr *v)
 {
 	/* FIXME: You will write this function */
-	
+	if(v->size == 0)
+		return 1;
+	else
+		return 0;
 	/* FIXME:  You will change this return value*/
-	return 1;
 }
 
 /* 	Push an element onto the top of the stack

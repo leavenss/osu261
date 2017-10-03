@@ -31,7 +31,7 @@ char nextChar(char* s)
 */
 int isBalanced(char* s)
 {
-	/* FIXME: You will write this function */		
+	/* FIXME: You will write this function */
 	return 0;
 }
 
