@@ -90,7 +90,7 @@ void deleteDynArr(DynArr *v)
 	post:	v has capacity newCap
 */
 void _dynArrSetCapacity(DynArr *v, int newCap)
-{	
+{
 	/* FIXME: You will write this function */
     struct DynArr myNewData;
     initDynArr(&myNewData, newCap);
@@ -183,6 +183,14 @@ void putDynArr(DynArr *v, int pos, TYPE val)
 void swapDynArr(DynArr *v, int i, int  j)
 {
 	/* FIXME: You will write this function */
+	assert(v!=0);
+	assert(!isEmptyDynArr(v));
+	assert(i >= 0 && j < v->size);
+	assert(j >= 0 && i < v->size);
+	TYPE temp = getDynArr(v, i);
+	putDynArr(v, i, getDynArr(v, j));
+	putDynArr(v, j, temp);
+
 }
 
 /*	Remove the element at the specified location from the array,
