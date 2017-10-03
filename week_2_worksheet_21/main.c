@@ -1,3 +1,5 @@
+/* This program contains the implementation of a dynamic array bag */
+
 #include <stdio.h>
 #include <assert.h>
 #include <malloc.h>
