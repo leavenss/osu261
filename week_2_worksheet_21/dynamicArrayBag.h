@@ -1,7 +1,11 @@
-#ifndef WEEK_2_WORKSHEET_16_DYNAMICARRAYSTACK_H
-#define WEEK_2_WORKSHEET_16_DYNAMICARRAYSTACK_H
+#ifndef WEEK_2_WORKSHEET_21_DYNAMICARRAYBAG_H
+#define WEEK_2_WORKSHEET_21_DYNAMICARRAYBAG_H
 
 #define TYPE int
+
+#ifndef EQ
+#define EQ(a, b) (a == b)
+#endif
 
 struct DynArr {
     TYPE * data;
@@ -36,4 +40,6 @@ void putDynArr (struct DynArr * da, int position, TYPE value);
 /* Check if array is empty */
 int isEmptyDynArray (struct DynArr * da);
 
-#endif //WEEK_2_WORKSHEET_16_DYNAMICARRAYSTACK_H
+void _dynArrayRemoveAt (struct DynArr * da, int index);
+
+#endif //WEEK_2_WORKSHEET_21_DYNAMICARRAYBAG_H
