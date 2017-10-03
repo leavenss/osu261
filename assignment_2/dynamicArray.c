@@ -190,7 +190,6 @@ void swapDynArr(DynArr *v, int i, int  j)
 	TYPE temp = getDynArr(v, i);
 	putDynArr(v, i, getDynArr(v, j));
 	putDynArr(v, j, temp);
-
 }
 
 /*	Remove the element at the specified location from the array,
@@ -207,6 +206,14 @@ void swapDynArr(DynArr *v, int i, int  j)
 void removeAtDynArr(DynArr *v, int idx)
 {
 	/* FIXME: You will write this function */
+	assert(v!=0);
+	assert(!isEmptyDynArr(v));
+	assert(idx < v->size && idx >=0);
+	while (idx < v->size) {
+		v->data[idx] = v->data[idx + 1]; //shifting everything over
+		idx++;
+	}
+	v->size--; //decrease size of array by 1
 }
 
 
@@ -312,4 +319,14 @@ int containsDynArr(DynArr *v, TYPE val)
 void removeDynArr(DynArr *v, TYPE val)
 {
 	/* FIXME: You will write this function */
+	assert(v!=0);
+	assert(!isEmptyDynArr(v));
+	assert(val < v->size && val >=0);
+	int i;
+	for (i = 0; i < v->size; i++) {
+		if (EQ(val, v->data[i])) { /* found it */
+			removeAtDynArr(v, i);
+			return;
+		}
+	}
 }
