@@ -1,6 +1,7 @@
 /*	stack.c: Stack application. */
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 #include "dynArray.h"
 
 
@@ -31,8 +32,33 @@ char nextChar(char* s)
 */
 int isBalanced(char* s)
 {
-	/* FIXME: You will write this function */
-	return 0;
+    assert(s!= 0);
+    DynArr *myArr;
+    myArr = newDynArr(1);
+	char newChar = nextChar(s);
+    printf("Current char is %c\n", newChar);
+    while (newChar != '\0'){
+        if (newChar == '{') {
+            pushDynArr(myArr, '}');
+        } else if (newChar == '[') {
+            pushDynArr(myArr, ']');
+        } else if (newChar == '(') {
+            printf("Pushing closing paren\n");
+            pushDynArr(myArr, ')');
+        } else if (newChar == '}' || newChar == ']' || newChar == ')') {
+            if (newChar == topDynArr(myArr)) {
+                popDynArr(myArr);
+            } else {
+                return 0; //mismatched parenthesis
+            }
+        } else {
+            continue; //Non-parenthesis, bracket, brace found
+        }
+        printf("Getting next char\n");
+        newChar = nextChar(s);
+        printf("Next char is %d\n", newChar);
+    }
+	return 1;
 }
 
 int main(int argc, char* argv[]){
