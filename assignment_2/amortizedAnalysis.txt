@@ -1,0 +1,40 @@
+1. How many cost units are spent in the entire process of performing 32 consecutive push operations on an empty array which starts out at capacity 8, assuming that the array will double in capacity each time a new item is added to an already full dynamic array? As N (ie. the number of pushes) grows large, under this strategy for resizing, what is the big-oh complexity for a push?
+
+    Add 1       Cost 1
+    Add 2       Cost 1
+    Add 3       Cost 1
+    Add 4       Cost 1
+    Add 5       Cost 1
+    Add 6       Cost 1
+    Add 7       Cost 1
+    Add 8       Cost 1
+    Add 9       Cost 8 + 1
+    Add 10      Cost 1
+    Add 11      Cost 1
+    Add 12      Cost 1
+    Add 13      Cost 1
+    Add 14      Cost 1
+    Add 15      Cost 1
+    Add 16      Cost 1
+    Add 17      Cost 16 + 1
+    Add 18      Cost 1
+    Add 19      Cost 1
+    Add 20      Cost 1
+    Add 21      Cost 1
+    Add 22      Cost 1
+    Add 23      Cost 1
+    Add 24      Cost 1
+    Add 25      Cost 1
+    Add 26      Cost 1
+    Add 27      Cost 1
+    Add 28      Cost 1
+    Add 29      Cost 1
+    Add 30      Cost 1
+    Add 31      Cost 1
+    Add 32      Cost 1
+
+The total cost for running 32 push operations on an empty array would be 56. As explained in Worksheet 15, if we follow this strategy for resizing, the likelihood of having to double the array decreases and we can therefore say that the amortized constant execution time would be O(1)+ meaning that only occasionally would a push operation not be O(1).
+
+2. How many cost units are spent in the entire process of performing 32 consecutive push operations on an empty array which starts out at capacity 8, assuming that the array will grow by a constant 2 spaces each time a new item is added to an already full dynamic array? As N (ie. the number of pushes) grows large, under this strategy for resizing, what is the big-oh complexity for a push?
+
+3. Suppose that a dynamic array stack doubles its capacity when it is full, and shrinks (on Pop only) its capacity by half when the array is half full or less. Can you devise a sequence of N push() and pop() operations which will result in poor performance (O(N^2) total cost)? How might you adjust the array's shrinking policy to avoid this? (Hint: You may assume that the initial capacity of the array is N/2.)
