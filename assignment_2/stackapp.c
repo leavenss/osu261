@@ -36,29 +36,34 @@ int isBalanced(char* s)
     DynArr *myArr;
     myArr = newDynArr(1);
 	char newChar = nextChar(s);
-    printf("Current char is %c\n", newChar);
+
     while (newChar != '\0'){
         if (newChar == '{') {
             pushDynArr(myArr, '}');
         } else if (newChar == '[') {
             pushDynArr(myArr, ']');
         } else if (newChar == '(') {
-            printf("Pushing closing paren\n");
             pushDynArr(myArr, ')');
         } else if (newChar == '}' || newChar == ']' || newChar == ')') {
             if (newChar == topDynArr(myArr)) {
                 popDynArr(myArr);
             } else {
+                freeDynArr(myArr);
                 return 0; //mismatched parenthesis
             }
         } else {
+            newChar = nextChar(s);
             continue; //Non-parenthesis, bracket, brace found
         }
-        printf("Getting next char\n");
         newChar = nextChar(s);
-        printf("Next char is %d\n", newChar);
     }
-	return 1;
+    if (isEmptyDynArr(myArr)) {
+        freeDynArr(myArr);
+        return 1;
+    } else {
+        freeDynArr(myArr);
+        return 0;
+    }
 }
 
 int main(int argc, char* argv[]){
