@@ -92,9 +92,10 @@ void deleteDynArr(DynArr *v)
 void _dynArrSetCapacity(DynArr *v, int newCap)
 {
 	assert(v!=0);
+    int a;
     struct DynArr myNewData;
     initDynArr(&myNewData, newCap);
-    for (int a = 0; a < v->size; a++) {
+    for (a = 0; a < v->size; a++) {
         addDynArr(&myNewData, v->data[a]);
     }
     freeDynArr(v);
