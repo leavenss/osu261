@@ -74,6 +74,7 @@ void dequeAddBack (struct deque *d, TYPE newValue) {
 
 TYPE dequeFront (struct deque *d) {
     //TODO: Implement this
+    return d->data[d->beg];
 }
 
 TYPE dequeBack (struct deque *d) {
@@ -87,6 +88,13 @@ TYPE dequeBack (struct deque *d) {
 
 void dequeRemoveFront (struct deque *d) {
     //TODO: Implement this
+    assert(d->size > 0);
+    d->size--;
+    if (d->beg == d->capacity-1){
+        d->beg = 0;
+    } else {
+        d->beg++;
+    }
 }
 
 void dequeRemoveBack (struct deque *d) {
@@ -98,9 +106,7 @@ int main() {
 
     struct deque myDeque;
     dequeInit(&myDeque, 5);
-    dequeAddBack(&myDeque, 5);
-    dequeAddBack(&myDeque, 6);
-    printf("Size of deque is %d\n",dequeSize(&myDeque));
+
 
     return 0;
 }
