@@ -5,8 +5,6 @@
 #include <malloc.h>
 #include "queuedeque.h"
 
-//------------------------------------
-
 void _dequeSetCapacity (struct deque *d, int newCap) {
     int i;
     /* Create a new underlying array*/
@@ -34,8 +32,11 @@ void dequeFree (struct deque *d) {
 }
 
 void dequeInit (struct deque *d, int initCapacity) {
-    d->size = d->beg = 0;
-    d->capacity = initCapacity; assert(initCapacity > 0);
+    d->size = 0;
+    d->beg = 0;
+
+    d->capacity = initCapacity;
+    assert(initCapacity > 0);
     d->data = (TYPE *) malloc(initCapacity * sizeof(TYPE));
     assert(d->data != 0);
 }
@@ -45,30 +46,61 @@ int dequeSize (struct deque *d) {
 }
 
 void dequeAddFront (struct deque *d, TYPE newValue) {
-    if (d->size >= d->capacity) _dequeSetCapacity(d, 2 * d->capacity);
+    if (d->size >= d->capacity) {
+        _dequeSetCapacity(d, 2 * d->capacity);
+    }
+    //TODO: Implement this
+    int index;
+    index = d->beg = d->size-1;
+    if (index > d->capacity){
+        index -= d->capacity;
+    }
+    d->data[d->beg-1] = newValue;
+    d->size++;
 }
 
 void dequeAddBack (struct deque *d, TYPE newValue) {
-    if (d->size >= d->capacity) _dequeSetCapacity(d, 2* d->capacity);
+    int index;
+    if (d->size >= d->capacity) {
+        _dequeSetCapacity(d, 2* d->capacity);
+    }
+    index = d->beg + d->size;
+    if (index >= d->capacity){
+        index -= d->capacity;
+    }
+    d->data[index] = newValue;
+    d->size++;
 }
 
 TYPE dequeFront (struct deque *d) {
+    //TODO: Implement this
 }
 
 TYPE dequeBack (struct deque *d) {
+    int index;
+    index = d->beg + d->size - 1;
+    if (index > d->capacity){
+        index -= d->capacity;
+    }
+    return d->data[index];
 }
 
 void dequeRemoveFront (struct deque *d) {
+    //TODO: Implement this
 }
 
 void dequeRemoveBack (struct deque *d) {
+    assert(d->size > 0);
+    d->size--;
 }
 
 int main() {
 
-    struct deque *myDeque;
-    dequeInit(myDeque, 5);
-
+    struct deque myDeque;
+    dequeInit(&myDeque, 5);
+    dequeAddBack(&myDeque, 5);
+    dequeAddBack(&myDeque, 6);
+    printf("Size of deque is %d\n",dequeSize(&myDeque));
 
     return 0;
 }

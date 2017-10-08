@@ -1,11 +1,7 @@
-#ifndef WEEK_3_WORKSHEET_20_DYNAMICARRAYBAG_H
-#define WEEK_3_WORKSHEET_20_DYNAMICARRAYBAG_H
+#ifndef WEEK_3_WORKSHEET_20_QUEUEDEQUE_H
+#define WEEK_3_WORKSHEET_20_QUEUEDEQUE_H
 
 #define TYPE int
-
-#ifndef EQ
-#define EQ(a, b) (a == b)
-#endif
 
 struct deque {
     TYPE * data;
@@ -34,4 +30,4 @@ void dequeRemoveFront (struct deque *d);
 
 void dequeRemoveBack (struct deque *d);
 
-#endif //WEEK_3_WORKSHEET_20_DYNAMICARRAYBAG_H
+#endif //WEEK_3_WORKSHEET_20_QUEUEDEQUE_H
