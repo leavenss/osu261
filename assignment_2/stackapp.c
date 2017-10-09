@@ -45,6 +45,9 @@ int isBalanced(char* s)
         } else if (newChar == '(') {
             pushDynArr(myArr, ')');
         } else if (newChar == '}' || newChar == ']' || newChar == ')') {
+            if (isEmptyDynArr(myArr)){
+                return 0;
+            }
             if (newChar == topDynArr(myArr)) {
                 popDynArr(myArr);
             } else {
