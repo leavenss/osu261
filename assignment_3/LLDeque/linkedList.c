@@ -46,6 +46,10 @@ static void init(struct LinkedList* list) {
 static void addLinkBefore(struct LinkedList* list, struct Link* link, TYPE value)
 {
 	// FIXME: you must write this
+	link->value = value;
+	link->next = list->frontSentinel->next;
+	list->frontSentinel->next = link;
+	link->prev = list->frontSentinel;
 }
 
 /**
@@ -55,6 +59,7 @@ static void addLinkBefore(struct LinkedList* list, struct Link* link, TYPE value
 static void removeLink(struct LinkedList* list, struct Link* link)
 {
 	// FIXME: you must write this
+
 }
 
 /**
@@ -88,6 +93,9 @@ void linkedListDestroy(struct LinkedList* list)
 void linkedListAddFront(struct LinkedList* list, TYPE value)
 {
 	// FIXME: you must write this
+	struct Link* newLink = malloc(sizeof(struct Link));
+	assert(newLink != 0);
+	addLinkBefore(list, newLink, value);
 }
 
 /**

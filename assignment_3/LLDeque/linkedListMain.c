@@ -16,8 +16,8 @@ int main(){
 	linkedListRemoveBack(l);
 	linkedListPrint(l);
 /* BAG */
-	
-      struct LinkedList* k = linkedListCreate(); 
+
+      struct LinkedList* k = linkedListCreate();
        linkedListAdd (k, (TYPE)10);
        linkedListAdd (k, (TYPE)11);
 	 linkedListAdd (k, (TYPE)13);
