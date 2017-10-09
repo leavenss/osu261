@@ -1,4 +1,9 @@
-/*	stack.c: Stack application. */
+/* CS261- Assignment 2 - Question 3
+ * Name: Taylor Liss
+ * Date: 10/8/17
+ * Solution description: This application checks the balance of brackets, parenthesis and braces in an equation, using a stack.
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
@@ -45,6 +50,9 @@ int isBalanced(char* s)
         } else if (newChar == '(') {
             pushDynArr(myArr, ')');
         } else if (newChar == '}' || newChar == ']' || newChar == ')') {
+            if (isEmptyDynArr(myArr)){
+                return 0;
+            }
             if (newChar == topDynArr(myArr)) {
                 popDynArr(myArr);
             } else {

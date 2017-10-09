@@ -1,3 +1,9 @@
+/* CS261- Assignment 2 - Question 2
+ * Name: Taylor Liss
+ * Date: 10/8/17
+ * Solution description: These are the answers to questions regarding the amortized analysis of push() and pop() functions.
+ */
+
 1. How many cost units are spent in the entire process of performing 32 consecutive push operations on an empty array which starts out at capacity 8, assuming that the array will double in capacity each time a new item is added to an already full dynamic array? As N (ie. the number of pushes) grows large, under this strategy for resizing, what is the big-oh complexity for a push?
 
     Add 1       Cost 1
@@ -45,84 +51,54 @@ The total cost for running 32 push operations on an empty array would be 56. As 
         Add 6       Cost 1
         Add 7       Cost 1
         Add 8       Cost 1
-        Add 9       Cost 2 + 1
+        Add 9       Cost 8 + 1
         Add 10      Cost 1
-        Add 11      Cost 2 + 1
+        Add 11      Cost 10 + 1
         Add 12      Cost 1
-        Add 13      Cost 2 + 1
+        Add 13      Cost 12 + 1
         Add 14      Cost 1
-        Add 15      Cost 2 + 1
+        Add 15      Cost 14 + 1
         Add 16      Cost 1
-        Add 17      Cost 2 + 1
+        Add 17      Cost 16 + 1
         Add 18      Cost 1
-        Add 19      Cost 2 + 1
+        Add 19      Cost 18 + 1
         Add 20      Cost 1
-        Add 21      Cost 2 + 1
+        Add 21      Cost 20 + 1
         Add 22      Cost 1
-        Add 23      Cost 2 + 1
+        Add 23      Cost 22 + 1
         Add 24      Cost 1
-        Add 25      Cost 2 + 1
+        Add 25      Cost 24 + 1
         Add 26      Cost 1
-        Add 27      Cost 2 + 1
+        Add 27      Cost 26 + 1
         Add 28      Cost 1
-        Add 29      Cost 2 + 1
+        Add 29      Cost 28 + 1
         Add 30      Cost 1
-        Add 31      Cost 2 + 1
+        Add 31      Cost 30 + 1
         Add 32      Cost 1
 
-    The total cost for running 32 push operations on an empty array would be 56. Every time a cost 2+1 occurs, you have an O(n) situation. Every time a cost 1 occurs, you have an O(1) situation. Because this evenly alternates between O(n) and O(1), you have a best case situation of O(1) and a worst case situation of O(n) for its complexity.
+    The total cost for running 32 push operations on an empty array would be 260. Every time push() occurs in which you have to copy the previous numbers over, you have an O(n) situation. Every time a cost 1 push() occurs, you have an O(1) situation. Because this evenly alternates between O(n) and O(1), you have a best case situation of O(1) and a worst case situation of O(n) for its complexity.
 
-3. Suppose that a dynamic array stack doubles its capacity when it is full, and shrinks (on Pop only) its capacity by half when the array is half full or less. Can you devise a sequence of N push() and pop() operations which will result in poor performance (O(N^2) total cost)? How might you adjust the array's shrinking policy to avoid this? (Hint: You may assume that the initial capacity of the array is N/2.)
+3. A total performance cost of O(N^2) will result in the following situation:
 
-    Let's assume that the original capacity is 4. Let's see what that might look if we only do push() operations:
+        (k * n/2) + (k * n/2) + n
 
-        Push 1       Cost 1
-        Push 2       Cost 1
-        Push 3       Cost 1
-        Push 4       Cost 1
-        Push 5       Cost 4 + 1
-        Push 6       Cost 1
-        Push 7       Cost 1
-        Push 8       Cost 1
-        Push 9       Cost 8 + 1
-        Push 10      Cost 1
+    where:  n = the total number of sequential alternating push() and pop() calls
+            k = the capacity of the array = n/2
+            the starting size of the array is equal to capacity
+            the first n/2 in the equation is equal to the number of push calls (half of n)
+            the second n/2 in the equation is equal to the number of pops calls (half of n)
 
-    Our array now looks like this:
-    _________________________________________________________________
-    | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10| - | - | - | - | - | - |
-    ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-    We have an array with capacity of 16. If we begin to pop(), it should reduce its size by half when it reaches a size of 8.
+    That equation can be reduced to:
 
-    Pop 10      Cost 1
-    Pop 9       Cost 8 + 1
-    Pop 8       Cost 1
-    Pop 7       Cost 1
-    Pop 6       Cost 1
-    Pop 5       Cost 4 + 1
-    Pop 4       Cost 1
-    Pop 3       Cost 1
-    Pop 2       Cost 1
-    Pop 1       Cost 1
+        (n^2/2) + n
 
-    It seems to me, that the worst case situation would occur when the array is half full:
-    _________________________________
-    | 1 | 2 | 3 | 4 | - | - | - | - |
-    ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-    If we were to push() at this point, we're looking at a cost of 8 + 1. If we then followed this with a pop(), it would be another 8 + 1. Likewise, if we had 9 elements in the array and did a pop() operation followed by a push() operation, we would have 8 + 1 and 8 + 1.
+    Which reduces to O(n^2) due to domination.
 
-    push        Cost 1
-    _________________________________
-    | 1 | 2 | 3 | 4 | 5 | - | - | - |
-    ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-    pop         Cost 4 + 1
-    _________________
-    | 1 | 2 | 3 | 4 |
-    ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-    push        Cost 4 + 1
-    _________________________________
-    | 1 | 2 | 3 | 4 | 5 | - | - | - |
-    ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-    pop         Cost 4 + 1
-    _________________
-    | 1 | 2 | 3 | 4 |
-    ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+    For example, if you made 10 alternating push() and pop() calls (five of each) and the array starts with the capacity and size started at 5 (full):
+
+    (10/2 * 10/2) + (10/2 * 10/2) + 10
+    =     (10^2/2) + 10
+
+    This performance issue could be somewhat mitigated by shrinking the array to half its size when it is 1/4 full instead of 1/2 full.
+
+

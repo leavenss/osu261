@@ -1,4 +1,9 @@
-/*	dynamicArray.c: Dynamic Array implementation. */
+/* CS261- Assignment 2 - Question 1
+ * Name: Taylor Liss
+ * Date: 10/8/17
+ * Solution description: This is my implementation of a dynamic array
+ */
+
 #include <assert.h>
 #include <stdlib.h>
 #include "dynArray.h"
