@@ -26,6 +26,17 @@ struct LinkedList
  */
 static void init(struct LinkedList* list) {
 	// FIXME: you must write this
+	list->frontSentinel = malloc(sizeof(struct Link)); //Is this right?
+	assert(list->frontSentinel != 0);
+	list->backSentinel = malloc(sizeof(struct Link)); //Is this right?
+	assert(list->backSentinel != 0);
+
+	list->frontSentinel->next = list->backSentinel;
+	list->backSentinel->next = list->frontSentinel;
+	list->size = 0;
+
+	list->frontSentinel->prev = 0;
+	list->backSentinel->next = 0;
 }
 
 /**
