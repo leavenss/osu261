@@ -1,3 +1,9 @@
+/* CS261- Assignment 2 - Question 2
+ * Name: Taylor Liss
+ * Date: 10/8/17
+ * Solution description: These are the answers to questions regarding the amortized analysis of push() and pop() functions.
+ */
+
 1. How many cost units are spent in the entire process of performing 32 consecutive push operations on an empty array which starts out at capacity 8, assuming that the array will double in capacity each time a new item is added to an already full dynamic array? As N (ie. the number of pushes) grows large, under this strategy for resizing, what is the big-oh complexity for a push?
 
     Add 1       Cost 1
