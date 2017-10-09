@@ -76,7 +76,7 @@ The total cost for running 32 push operations on an empty array would be 56. As 
 
         (k * n/2) + (k * n/2) + n
 
-    where:  n = the total number of sequential push() and pop() calls
+    where:  n = the total number of sequential alternating push() and pop() calls
             k = the capacity of the array = n/2
             the starting size of the array is equal to capacity
             the first n/2 in the equation is equal to the number of push calls (half of n)
@@ -88,7 +88,7 @@ The total cost for running 32 push operations on an empty array would be 56. As 
 
     Which reduces to O(n^2) due to domination.
 
-    For example, if you made 10 push() and pop() calls (five of each) and the array starts with the capacity and size started at 5 (full):
+    For example, if you made 10 alternating push() and pop() calls (five of each) and the array starts with the capacity and size started at 5 (full):
 
     (10/2 * 10/2) + (10/2 * 10/2) + 10
     =     (10^2/2) + 10
