@@ -26,9 +26,9 @@ struct LinkedList
  */
 static void init(struct LinkedList* list) {
 	// FIXME: you must write this
-	list->frontSentinel = malloc(sizeof(struct Link)); //Is this right?
+	list->frontSentinel = malloc(sizeof(struct Link));
 	assert(list->frontSentinel != 0);
-	list->backSentinel = malloc(sizeof(struct Link)); //Is this right?
+	list->backSentinel = malloc(sizeof(struct Link));
 	assert(list->backSentinel != 0);
 
 	list->frontSentinel->next = list->backSentinel;
@@ -46,10 +46,16 @@ static void init(struct LinkedList* list) {
 static void addLinkBefore(struct LinkedList* list, struct Link* link, TYPE value)
 {
 	// FIXME: you must write this
-	link->value = value;
-	link->next = list->frontSentinel->next;
-	list->frontSentinel->next = link;
-	link->prev = list->frontSentinel;
+    struct Link* newLink = malloc(sizeof(struct Link));
+    assert(newLink != 0);
+    newLink->value = value;
+
+    link->prev->next = newLink;
+    link->prev = newLink;
+    newLink->next = link;
+    newLink->prev = link->prev;
+
+    list->size++;
 }
 
 /**
@@ -93,9 +99,7 @@ void linkedListDestroy(struct LinkedList* list)
 void linkedListAddFront(struct LinkedList* list, TYPE value)
 {
 	// FIXME: you must write this
-	struct Link* newLink = malloc(sizeof(struct Link));
-	assert(newLink != 0);
-	addLinkBefore(list, newLink, value);
+    addLinkBefore(list, list->frontSentinel->next, value);
 }
 
 /**
@@ -104,6 +108,12 @@ void linkedListAddFront(struct LinkedList* list, TYPE value)
 void linkedListAddBack(struct LinkedList* list, TYPE value)
 {
 	// FIXME: you must write this
+    struct Link* newLink = malloc(sizeof(struct Link));
+    assert(newLink != 0);
+    newLink->value = value;
+    list->backSentinel->prev->next = newLink;
+    newLink->prev = list->backSentinel->prev;
+    list->backSentinel->prev = newLink;
 }
 
 /**
@@ -154,6 +164,7 @@ int linkedListIsEmpty(struct LinkedList* list)
 void linkedListPrint(struct LinkedList* list)
 {
 	// FIXME: you must write this
+    printf("First link's value is: %d\n",list->frontSentinel->next->value);
     struct Link* iterator = malloc(sizeof(struct Link));
     assert(iterator != 0);
 
