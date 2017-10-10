@@ -112,6 +112,7 @@ void linkedListAddBack(struct LinkedList* list, TYPE value)
 TYPE linkedListFront(struct LinkedList* list)
 {
 	// FIXME: you must write this
+    return(list->frontSentinel->next->value);
 }
 
 /**
@@ -120,6 +121,7 @@ TYPE linkedListFront(struct LinkedList* list)
 TYPE linkedListBack(struct LinkedList* list)
 {
 	// FIXME: you must write this
+    return(list->backSentinel->prev->value);
 }
 
 /**
@@ -152,6 +154,16 @@ int linkedListIsEmpty(struct LinkedList* list)
 void linkedListPrint(struct LinkedList* list)
 {
 	// FIXME: you must write this
+    struct Link* iterator = malloc(sizeof(struct Link));
+    assert(iterator != 0);
+
+    iterator = list->frontSentinel->next;
+    while (iterator != list->backSentinel){
+        printf("%d ",iterator->value);
+        iterator = iterator->next;
+    }
+    printf("\n");
+    free(iterator);
 }
 
 /**
