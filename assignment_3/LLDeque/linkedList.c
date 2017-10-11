@@ -32,11 +32,11 @@ static void init(struct LinkedList* list) {
 	assert(list->backSentinel != 0);
 
 	list->frontSentinel->next = list->backSentinel;
-	list->backSentinel->next = list->frontSentinel;
-	list->size = 0;
+    list->frontSentinel->prev = 0;
 
-	list->frontSentinel->prev = 0;
-	list->backSentinel->next = 0;
+	list->backSentinel->prev = list->frontSentinel;
+    list->backSentinel->next = 0;
+	list->size = 0;
 }
 
 /**
@@ -114,6 +114,7 @@ void linkedListAddBack(struct LinkedList* list, TYPE value)
     list->backSentinel->prev->next = newLink;
     newLink->prev = list->backSentinel->prev;
     list->backSentinel->prev = newLink;
+    list->size++;
 }
 
 /**
@@ -164,17 +165,15 @@ int linkedListIsEmpty(struct LinkedList* list)
 void linkedListPrint(struct LinkedList* list)
 {
 	// FIXME: you must write this
-    printf("First link's value is: %d\n",list->frontSentinel->next->value);
-    struct Link* iterator = malloc(sizeof(struct Link));
-    assert(iterator != 0);
+    int i;
+    struct Link* iterator;
 
     iterator = list->frontSentinel->next;
-    while (iterator != list->backSentinel){
+    for (i=0; i < list->size; i++){
         printf("%d ",iterator->value);
         iterator = iterator->next;
     }
     printf("\n");
-    free(iterator);
 }
 
 /**
