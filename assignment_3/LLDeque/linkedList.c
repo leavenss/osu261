@@ -66,7 +66,11 @@ static void addLinkBefore(struct LinkedList* list, struct Link* link, TYPE value
 static void removeLink(struct LinkedList* list, struct Link* link)
 {
 	// FIXME: you must write this
-
+    assert(!linkedListIsEmpty(list));
+    link->prev->next = link->next;
+    link->next->prev = link->prev;
+    free(link);
+    list->size--;
 }
 
 /**
@@ -136,6 +140,7 @@ TYPE linkedListBack(struct LinkedList* list)
 void linkedListRemoveFront(struct LinkedList* list)
 {
 	// FIXME: you must write this
+    removeLink(list, list->frontSentinel->next);
 }
 
 /**
@@ -144,6 +149,8 @@ void linkedListRemoveFront(struct LinkedList* list)
 void linkedListRemoveBack(struct LinkedList* list)
 {
 	// FIXME: you must write this
+    removeLink(list, list->backSentinel->prev);
+
 }
 
 /**
@@ -152,6 +159,11 @@ void linkedListRemoveBack(struct LinkedList* list)
 int linkedListIsEmpty(struct LinkedList* list)
 {
 	// FIXME: you must write this
+    if (list->frontSentinel->next == list->backSentinel && list->backSentinel->prev == list->frontSentinel){
+        return 1;
+    } else {
+        return 0;
+    }
 }
 
 /**
