@@ -17,12 +17,13 @@ int main(){
 	linkedListPrint(l);
 
 //	/* BAG */
-//	struct LinkedList* k = linkedListCreate();
-//	linkedListAdd (k, (TYPE)10);
-//	linkedListAdd (k, (TYPE)11);
-//	linkedListAdd (k, (TYPE)13);
-//	linkedListAdd(k, (TYPE)14);
-//	linkedListRemove(k, (TYPE)11);
-//	linkedListPrint(k);
+	struct LinkedList* k = linkedListCreate();
+	linkedListAdd (k, (TYPE)10);
+	linkedListAdd (k, (TYPE)11);
+	linkedListAdd (k, (TYPE)13);
+	linkedListAdd(k, (TYPE)14);
+	linkedListPrint(k);
+	linkedListRemove(k, (TYPE)11);
+	linkedListPrint(k);
 	return 0;
 }

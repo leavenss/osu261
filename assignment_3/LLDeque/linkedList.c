@@ -189,6 +189,7 @@ void linkedListPrint(struct LinkedList* list)
 void linkedListAdd(struct LinkedList* list, TYPE value)
 {
 	// FIXME: you must write this
+    linkedListAddFront(list, value);
 }
 
 /**
@@ -197,6 +198,19 @@ void linkedListAdd(struct LinkedList* list, TYPE value)
 int linkedListContains(struct LinkedList* list, TYPE value)
 {
 	// FIXME: you must write this
+    assert(!linkedListIsEmpty(list));
+    int isInBag = 0;
+    int i;
+    struct Link* iterator;
+
+    iterator = list->frontSentinel->next;
+    for (i=0; i < list->size; i++){
+        if (iterator->value == value){
+            isInBag = 1;
+        }
+        iterator = iterator->next;
+    }
+    return isInBag;
 }
 
 /**
@@ -205,4 +219,17 @@ int linkedListContains(struct LinkedList* list, TYPE value)
 void linkedListRemove(struct LinkedList* list, TYPE value)
 {
 	// FIXME: you must write this
+    assert(!linkedListIsEmpty(list));
+    assert(linkedListContains(list, value));
+    int i;
+    struct Link* iterator;
+
+    iterator = list->frontSentinel->next;
+    for (i=0; i < list->size; i++){
+        if (iterator->value == value){
+            removeLink(list,iterator);
+            break;
+        }
+        iterator = iterator->next;
+    }
 }
