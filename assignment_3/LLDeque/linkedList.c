@@ -50,10 +50,11 @@ static void addLinkBefore(struct LinkedList* list, struct Link* link, TYPE value
     assert(newLink != 0);
     newLink->value = value;
 
-    link->prev->next = newLink;
-    link->prev = newLink;
+
     newLink->next = link;
     newLink->prev = link->prev;
+    link->prev = newLink;
+    newLink->prev->next = newLink;
 
     list->size++;
 }
@@ -108,13 +109,7 @@ void linkedListAddFront(struct LinkedList* list, TYPE value)
 void linkedListAddBack(struct LinkedList* list, TYPE value)
 {
 	// FIXME: you must write this
-    struct Link* newLink = malloc(sizeof(struct Link));
-    assert(newLink != 0);
-    newLink->value = value;
-    list->backSentinel->prev->next = newLink;
-    newLink->prev = list->backSentinel->prev;
-    list->backSentinel->prev = newLink;
-    list->size++;
+    addLinkBefore(list, list->backSentinel, value);
 }
 
 /**
