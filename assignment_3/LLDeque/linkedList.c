@@ -50,7 +50,6 @@ static void addLinkBefore(struct LinkedList* list, struct Link* link, TYPE value
     assert(newLink != 0);
     newLink->value = value;
 
-
     newLink->next = link;
     newLink->prev = link->prev;
     link->prev = newLink;

@@ -24,7 +24,6 @@ struct CircularList
 static void init(struct CircularList* list)
 {
 	// FIXME: you must write this
-	// FIXME: you must write this
 	list->sentinel = malloc(sizeof(struct Link));
 	assert(list->sentinel != 0);
 
@@ -40,7 +39,12 @@ static void init(struct CircularList* list)
 static struct Link* createLink(TYPE value)
 {
 	// FIXME: you must write this
-	return NULL;
+	struct Link* newLink = malloc(sizeof(struct Link));
+	assert(newLink != 0);
+	newLink->value = value;
+	newLink->next = NULL;
+	newLink->prev = NULL;
+	return newLink;
 }
 
 /**
@@ -50,6 +54,15 @@ static struct Link* createLink(TYPE value)
 static void addLinkAfter(struct CircularList* list, struct Link* link, TYPE value)
 {
 	// FIXME: you must write this
+
+	struct Link* newLink = createLink(value);
+
+	newLink->next = link->next;
+	newLink->prev = link;
+	link->next = newLink;
+	newLink->next->prev = newLink;
+
+	list->size++;
 }
 
 /**
