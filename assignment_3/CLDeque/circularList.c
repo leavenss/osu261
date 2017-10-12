@@ -24,6 +24,14 @@ struct CircularList
 static void init(struct CircularList* list)
 {
 	// FIXME: you must write this
+	// FIXME: you must write this
+	list->sentinel = malloc(sizeof(struct Link));
+	assert(list->sentinel != 0);
+
+	list->sentinel->next = list->sentinel;
+	list->sentinel->prev = list->sentinel;
+
+	list->size = 0;
 }
 
 /**
