@@ -193,4 +193,14 @@ void circularListPrint(struct CircularList* list)
 void circularListReverse(struct CircularList* list)
 {
 	// FIXME: you must write this
+    assert(!circularListIsEmpty(list));
+    struct Link *iterator;
+    struct Link *temp;
+    iterator = list->sentinel;
+    do {
+            temp = iterator->prev;
+            iterator->prev = iterator->next;
+            iterator->next = temp;
+            iterator = iterator->prev;
+        } while(iterator != list->sentinel);
 }
