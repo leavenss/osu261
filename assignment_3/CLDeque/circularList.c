@@ -72,6 +72,11 @@ static void addLinkAfter(struct CircularList* list, struct Link* link, TYPE valu
 static void removeLink(struct CircularList* list, struct Link* link)
 {
 	// FIXME: you must write this
+    assert(!circularListIsEmpty(list));
+    link->prev->next = link->next;
+    link->next->prev = link->prev;
+    free(link);
+    list->size--;
 }
 
 /**
@@ -148,6 +153,11 @@ void circularListRemoveBack(struct CircularList* list)
 int circularListIsEmpty(struct CircularList* list)
 {
 	// FIXME: you must write this
+    if (list->sentinel->next == list->sentinel && list->sentinel->prev == list->sentinel){
+        return 1;
+    } else {
+        return 0;
+    }
 	return 0;
 }
 
