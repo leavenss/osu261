@@ -1,3 +1,9 @@
+/* CS261- Assignment 3 - Problem 3
+ * Name: Taylor Liss
+ * Date: 10/13/17
+ * Solution description: This file implements a deque with a circularly­doubly­linked list with a sentinel
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>

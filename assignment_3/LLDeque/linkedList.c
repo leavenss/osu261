@@ -1,3 +1,9 @@
+/* CS261- Assignment 3 - Problem 1
+ * Name: Taylor Liss
+ * Date: 10/13/17
+ * Solution description: This file implements a deque and bag with a doubly­linked list with sentinels
+ */
+
 #include "linkedList.h"
 #include <assert.h>
 #include <stdlib.h>
