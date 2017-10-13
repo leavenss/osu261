@@ -127,7 +127,7 @@ void circularListAddBack(struct CircularList* list, TYPE value)
 TYPE circularListFront(struct CircularList* list)
 {
 	// FIXME: you must write this
-	return 0;
+	return (list->sentinel->next->value);
 }
 
 /**
@@ -136,7 +136,7 @@ TYPE circularListFront(struct CircularList* list)
 TYPE circularListBack(struct CircularList* list)
 {
 	// FIXME: you must write this
-	return 0;
+	return (list->sentinel->prev->value);
 }
 
 /**
@@ -145,6 +145,7 @@ TYPE circularListBack(struct CircularList* list)
 void circularListRemoveFront(struct CircularList* list)
 {
 	// FIXME: you must write this
+    removeLink(list, list->sentinel->next);
 }
 
 /**
@@ -153,6 +154,7 @@ void circularListRemoveFront(struct CircularList* list)
 void circularListRemoveBack(struct CircularList* list)
 {
 	// FIXME: you must write this
+    removeLink(list, list->sentinel->prev);
 }
 
 /**
@@ -175,6 +177,14 @@ int circularListIsEmpty(struct CircularList* list)
 void circularListPrint(struct CircularList* list)
 {
 	// FIXME: you must write this
+    assert(!circularListIsEmpty(list));
+    struct Link* iterator;
+    iterator = list->sentinel->next;
+    while (iterator != list->sentinel){
+        printf("%f ", iterator->value);
+        iterator = iterator->next;
+    }
+    printf("\n");
 }
 
 /**
