@@ -95,6 +95,12 @@ struct CircularList* circularListCreate()
 void circularListDestroy(struct CircularList* list)
 {
 	// FIXME: you must write this
+    while (!circularListIsEmpty(list))
+    {
+        circularListRemoveFront(list);
+    }
+    free(list->sentinel);
+    free(list);
 }
 
 /**
@@ -103,6 +109,7 @@ void circularListDestroy(struct CircularList* list)
 void circularListAddFront(struct CircularList* list, TYPE value)
 {
 	// FIXME: you must write this
+    addLinkAfter(list, list->sentinel, value);
 }
 
 /**
@@ -111,6 +118,7 @@ void circularListAddFront(struct CircularList* list, TYPE value)
 void circularListAddBack(struct CircularList* list, TYPE value)
 {
 	// FIXME: you must write this
+    addLinkAfter(list, list->sentinel->prev, value);
 }
 
 /**
