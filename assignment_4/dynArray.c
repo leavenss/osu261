@@ -357,12 +357,13 @@ void _buildHeap(DynArr *heap)
 	/* FIXME */
     assert(sizeDynArr(heap)>0);
     int max = sizeDynArr(heap) - 1;
-    int i; //First non-leaf node
+    int i; /*First non-leaf node*/
 
     i = (sizeDynArr(heap)/2 - 1);
 
-    for (i; i>=0; i--) {
+    while (i>=0){
         _adjustHeap(heap, max, i);
+        i++;
     }
 
 	
