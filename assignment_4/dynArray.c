@@ -339,7 +339,7 @@ void removeMinHeap(DynArr *heap)
 	int last;
 	assert(sizeDynArr(heap)>0);
 	last = sizeDynArr(heap) - 1;
-	putDynArr(heap, 0, getDynArr(heap, last));
+	swapDynArr(heap, 0, last);
 	removeAtDynArr(heap, last);
 	_adjustHeap(heap, last, 0);
 }
@@ -365,8 +365,6 @@ void _buildHeap(DynArr *heap)
         _adjustHeap(heap, max, i);
         i++;
     }
-
-	
 }
 /* 
 	In-place sort of the heap 
@@ -379,9 +377,12 @@ void _buildHeap(DynArr *heap)
 void sortHeap(DynArr *heap)
 {
 	/*FIXME*/
+    int last;
+    assert(sizeDynArr(heap)>0);
+    last = sizeDynArr(heap) - 1;
+    while (last>=0){
+        swapDynArr(heap, 0, last);
+        _adjustHeap(heap, last, 0);
+        last--;
+    }
 }
-
-/*
- *
- *
- */
