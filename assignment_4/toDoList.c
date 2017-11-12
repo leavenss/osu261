@@ -37,7 +37,14 @@ TYPE createTask (int priority, char *desc)
 */
 void saveList(DynArr *heap, FILE *filePtr)
 {
-  	/* FIX ME */
+	/* FIX ME */
+	assert(sizeDynArr(heap)>0);
+	filePtre=fopen("test.txt", "w");
+	assert(filePtr!=NULL);
+
+
+
+	int fclose(FILE *filePtr);
 }
 
 /*  Load the list from a file
@@ -63,6 +70,7 @@ void loadList(DynArr *heap, FILE *filePtr)
 void printList(DynArr *heap)
 {
   	/* FIX ME  */
+
 }
 
 /*  Compare two tasks by priority
