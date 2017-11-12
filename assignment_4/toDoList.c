@@ -38,13 +38,12 @@ TYPE createTask (int priority, char *desc)
 void saveList(DynArr *heap, FILE *filePtr)
 {
 	/* FIX ME */
-	assert(sizeDynArr(heap)>0);
-	filePtre=fopen("test.txt", "w");
-	assert(filePtr!=NULL);
+    int i=0;
 
-
-
-	int fclose(FILE *filePtr);
+	while (i < sizeDynArr(heap)) {
+		fprintf(filePtr, "%d\t%s\r\n", heap->data[i].priority, heap->data[i].description);
+		i++;
+	}
 }
 
 /*  Load the list from a file
@@ -58,6 +57,15 @@ void saveList(DynArr *heap, FILE *filePtr)
 void loadList(DynArr *heap, FILE *filePtr)
 {
   	/* FIX ME */
+
+    int priority;
+    char description[128];
+    Task task;
+
+    while (fscanf(filePtr, "%d\t%128[^\r][^\n]", &priority, description) == 2){
+        task = createTask(priority, description);
+        addHeap(heap, task);
+    }
 }
 
 /*  Print the list
