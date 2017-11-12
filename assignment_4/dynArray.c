@@ -284,6 +284,7 @@ void addHeap(DynArr *heap, TYPE node)
 	int parent;
 	int pos = sizeDynArr(heap);
 	addDynArr(heap,node);
+	heap->size++;
 
     /*percolates up*/
 	while(pos != 0){

@@ -38,6 +38,7 @@ TYPE createTask (int priority, char *desc)
 void saveList(DynArr *heap, FILE *filePtr)
 {
 	/* FIX ME */
+    assert(sizeDynArr(heap)!=0);
     int i=0;
 
 	while (i < sizeDynArr(heap)) {
@@ -78,7 +79,17 @@ void loadList(DynArr *heap, FILE *filePtr)
 void printList(DynArr *heap)
 {
   	/* FIX ME  */
+    assert(sizeDynArr(heap)!=0);
 
+    int i = sizeDynArr(heap)-1;
+
+    sortHeap(heap);
+    printf("\n");
+    while (i != 0){
+        printf("%d\t%s\n", heap->data[i].priority, heap->data[i].description);
+        i--;
+    }
+    printf("\n");
 }
 
 /*  Compare two tasks by priority
