@@ -1,6 +1,7 @@
 /*	dynArray.c: Dynamic Array implementation. */
 #include <assert.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include "dynArray.h"
 
 /* ************************************************************************
@@ -284,7 +285,6 @@ void addHeap(DynArr *heap, TYPE node)
 	int parent;
 	int pos = sizeDynArr(heap);
 	addDynArr(heap,node);
-	heap->size++;
 
     /*percolates up*/
 	while(pos != 0){
@@ -311,21 +311,24 @@ void _adjustHeap(DynArr *heap, int max, int pos)
   	/* FIXME */
 	int leftIdx = pos * 2 + 1;
 	int rightIdx = pos * 2 + 2;
-	int minIdx = _smallerIndexHeap(heap, leftIdx, rightIdx);
-
-	if (rightIdx < max){
-		if (heap->data[minIdx].priority < heap->data[pos].priority) {
-			swapDynArr(heap, leftIdx, rightIdx);
-			_adjustHeap(heap, max, minIdx);
-		}
-	} else if (leftIdx < max) {
-		if (heap->data[leftIdx].priority < heap->data[pos].priority){
-			swapDynArr(heap, leftIdx, rightIdx);
-			_adjustHeap(heap, max, leftIdx);
-		}
-	} else {
-		return;
-	}
+	int minIdx;
+    
+    if (rightIdx < max) {
+        if (compare(getDynArr(heap, leftIdx), getDynArr(heap, rightIdx)) == -1) {
+            minIdx = leftIdx;
+        } else {
+            minIdx = rightIdx;
+        }
+        if (compare(getDynArr(heap, minIdx), getDynArr(heap, pos)) == -1) {
+            swapDynArr(heap, pos, minIdx);
+            _adjustHeap(heap, max, minIdx);
+        }
+    } else if (leftIdx < max) {
+        if (compare(getDynArr(heap, leftIdx), getDynArr(heap, pos)) == -1) {
+            swapDynArr(heap, pos, leftIdx);
+            _adjustHeap(heap, max, leftIdx);
+        }
+    }
 }
 
 /*	Remove the first node, which has the min priority, from the heap
@@ -380,8 +383,8 @@ void sortHeap(DynArr *heap)
 	/*FIXME*/
     int last;
     assert(sizeDynArr(heap)>0);
-    last = sizeDynArr(heap) - 1;
-    while (last>=0){
+    last = sizeDynArr(heap)-1;
+    while (last>0){
         swapDynArr(heap, 0, last);
         _adjustHeap(heap, last, 0);
         last--;
