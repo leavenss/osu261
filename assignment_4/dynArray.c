@@ -1,4 +1,9 @@
-/*	dynArray.c: Dynamic Array implementation. */
+/* CS261- Assignment 4 - dynArray.c: Dynamic Array implementation.
+ * Name: Taylor Liss
+ * Date: 11/13/17
+ * Solution description: This is my implementation of a heap using a dynamic array.
+ */
+
 #include <assert.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -264,7 +269,6 @@ int _smallerIndexHeap(DynArr *heap, int i, int j)
 */
 TYPE getMinHeap(DynArr *heap)
 {
-  	/* FIXME */
 	assert(sizeDynArr(heap)>0);
 	TYPE temp;
 	temp = heap->data[0];
@@ -280,7 +284,6 @@ TYPE getMinHeap(DynArr *heap)
 */
 void addHeap(DynArr *heap, TYPE node)
 {
-  	/* FIXME */
 	assert (heap != NULL);
 	int parent;
 	int pos = sizeDynArr(heap);
@@ -308,11 +311,10 @@ void addHeap(DynArr *heap, TYPE node)
 */
 void _adjustHeap(DynArr *heap, int max, int pos)
 {
-  	/* FIXME */
 	int leftIdx = pos * 2 + 1;
 	int rightIdx = pos * 2 + 2;
 	int minIdx;
-    
+
     if (rightIdx < max) {
         if (compare(getDynArr(heap, leftIdx), getDynArr(heap, rightIdx)) == -1) {
             minIdx = leftIdx;
@@ -339,7 +341,6 @@ void _adjustHeap(DynArr *heap, int max, int pos)
 */
 void removeMinHeap(DynArr *heap)
 {
-  	/* FIXME */
 	int last;
 	assert(sizeDynArr(heap)>0);
 	last = sizeDynArr(heap) - 1;
@@ -358,7 +359,6 @@ void removeMinHeap(DynArr *heap)
 
 void _buildHeap(DynArr *heap)
 {
-	/* FIXME */
     assert(sizeDynArr(heap)>0);
     int max = sizeDynArr(heap) - 1;
     int i; /*First non-leaf node*/
@@ -380,7 +380,6 @@ void _buildHeap(DynArr *heap)
 
 void sortHeap(DynArr *heap)
 {
-	/*FIXME*/
     int last;
     assert(sizeDynArr(heap)>0);
     last = sizeDynArr(heap)-1;

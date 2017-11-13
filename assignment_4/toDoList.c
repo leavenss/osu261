@@ -1,3 +1,10 @@
+/* CS261- Assignment 4 - toDoList.c: ToDoList Implementation
+ * Name: Taylor Liss
+ * Date: 11/13/17
+ * Solution description: This is my implementation of a to-do list using a
+ * heap dynamic structure.
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
