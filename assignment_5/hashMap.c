@@ -280,6 +280,20 @@ void hashMapRemove(HashMap* map, const char* key)
 int hashMapContainsKey(HashMap* map, const char* key)
 {
     // FIXME: implement
+    int mapLocation = HASH_FUNCTION(key) % map->capacity;
+    HashLink *linkIterator = map->table[mapLocation];
+
+    if (mapLocation < 0){
+        mapLocation = mapLocation + map->capacity;
+    }
+
+    while (linkIterator != NULL){
+        if (linkIterator->key == map->table[mapLocation]){
+            return 1;
+        }
+        linkIterator = linkIterator->next;
+    }
+
     return 0;
 }
 
