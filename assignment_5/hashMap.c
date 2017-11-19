@@ -201,6 +201,37 @@ void resizeTable(HashMap* map, int capacity)
 void hashMapPut(HashMap* map, const char* key, int value)
 {
     // FIXME: implement
+    if (key != NULL){
+        int mapLocation = HASH_FUNCTION(key) % map->capacity;
+        HashLink* linkIterator = map->table[mapLocation];
+        float currentLoad = hashMapTableLoad(map);
+
+        //Check for an existing link with the given key
+        int* currentValue = hashMapGet(map, key);
+        //If the key exists, replace its value with the new value
+        if (currentValue != NULL) {
+            *currentValue += value;
+        } else {
+            //else if the key does not exist, create a new link
+            HashLink *newLinkToAdd = hashLinkNew(key, value, 0);
+            //if the mapLocation has no links, add the new link
+            if (map->table[mapLocation] == NULL) {
+                map->table[mapLocation] = newLinkToAdd;
+            } else {
+                //else if the mapLocation has links (and none of
+                //them correlate to the key), add link to the end.
+                while (linkIterator->next != NULL){
+                    linkIterator = linkIterator->next;
+                }
+                linkIterator->next = newLinkToAdd;
+            }
+            map->size = map->size + 1;
+        }
+        //check if you need to resize
+        if (currentLoad >= MAX_TABLE_LOAD){
+            resizeTable(map, 2 * map->capacity);
+        }
+    }
 }
 
 /**
