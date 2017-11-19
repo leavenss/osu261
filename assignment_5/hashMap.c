@@ -288,7 +288,7 @@ int hashMapContainsKey(HashMap* map, const char* key)
     }
 
     while (linkIterator != NULL){
-        if (linkIterator->key == map->table[mapLocation]){
+        if (linkIterator->key == key){
             return 1;
         }
         linkIterator = linkIterator->next;
