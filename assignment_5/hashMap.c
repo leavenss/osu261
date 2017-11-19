@@ -83,14 +83,20 @@ void hashMapInit(HashMap* map, int capacity)
 void hashMapCleanUp(HashMap* map)
 {
     // FIXME: implement
+    HashLink *linkIterator;
+    HashLink *nextLink;
+
     for (int i = 0; i < map->capacity; i++)
     {
-        while (map->table[i] != NULL){
-            HashLink* link = map->table[i];
-            map->table[i]->next = link->next;
-            hashLinkDelete(link);
+        nextLink = map->table[i];
+        while (nextLink != NULL){
+            linkIterator = nextLink->next;
+            hashLinkDelete(nextLink);
+            nextLink = linkIterator;
         }
     }
+    free(map->table);
+    map->size = 0;
 }
 
 /**
@@ -161,7 +167,10 @@ void resizeTable(HashMap* map, int capacity)
     HashMap* newMap = hashMapNew(capacity);
     HashLink* tempLink;
 
-    for (int i=0; i < map->capacity; i++){
+    int prevCapacity = hashMapCapacity(map);
+
+
+    for (int i=0; i < prevCapacity; i++){
         tempLink = map->table[i];
 
         //Copy each link over to the new map
@@ -170,19 +179,22 @@ void resizeTable(HashMap* map, int capacity)
             tempLink = tempLink->next;
         }
     }
-
     //Remove all the old links
     hashMapCleanUp(map);
+    printf("make it here?\n");
     //Update the old map's values with the values from the new map
     map->table = newMap->table;
     map->size = newMap->size;
-    map->capacity = newMap->capacity;
+    map->capacity = capacity;
+
 
     //Now newMap's table and map's table are pointing to the same table.
     //Set newMap's table to NULL so only map is pointing to table.
     newMap->table = NULL;
     //Now when we free newMap, we don't lose the table that map is pointing to.
     free(newMap);
+    printf("Capacity after resize: %d\n", map->capacity);
+
 }
 
 /**
@@ -201,10 +213,12 @@ void resizeTable(HashMap* map, int capacity)
 void hashMapPut(HashMap* map, const char* key, int value)
 {
     // FIXME: implement
+
+    printf("KVH: %c - %d - %d\n",*key, value, (HASH_FUNCTION(key)%map->capacity));
+
     if (key != NULL){
         int mapLocation = HASH_FUNCTION(key) % map->capacity;
         HashLink* linkIterator = map->table[mapLocation];
-        float currentLoad = hashMapTableLoad(map);
 
         //Check for an existing link with the given key
         int* currentValue = hashMapGet(map, key);
@@ -228,8 +242,11 @@ void hashMapPut(HashMap* map, const char* key, int value)
             map->size = map->size + 1;
         }
         //check if you need to resize
+        float currentLoad = hashMapTableLoad(map);
         if (currentLoad >= MAX_TABLE_LOAD){
+            printf("Capacity before resize is %d\n", map->capacity);
             resizeTable(map, 2 * map->capacity);
+            printf("Capacity after resize is %d\n", map->capacity);
         }
     }
 }
