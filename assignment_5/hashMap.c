@@ -244,6 +244,27 @@ void hashMapPut(HashMap* map, const char* key, int value)
 void hashMapRemove(HashMap* map, const char* key)
 {
     // FIXME: implement
+    int mapLocation = HASH_FUNCTION(key) % map->capacity;
+    HashLink *linkIterator = map->table[mapLocation];
+    HashLink *tempLink = NULL;
+
+    if (linkIterator != NULL){
+        //if the first link is the one we are looking for
+        if (linkIterator->key == key) {
+            //set the first link to the next link
+            map->table[mapLocation] = linkIterator->next;
+        } else {
+            //start searching though links until we get a match
+            while(linkIterator->key != key){
+                tempLink = linkIterator;
+                linkIterator = linkIterator->next;
+            }
+            //link the previous link to the one after linkIterator
+            tempLink->next = linkIterator->next;
+        }
+        hashLinkDelete(linkIterator);
+        map->size = map->size - 1;
+    }
 }
 
 /**
