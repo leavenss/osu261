@@ -157,6 +157,32 @@ int* hashMapGet(HashMap* map, const char* key)
 void resizeTable(HashMap* map, int capacity)
 {
     // FIXME: implement
+    //Create new hashmap with the correct size
+    HashMap* newMap = hashMapNew(capacity);
+    HashLink* tempLink;
+
+    for (int i=0; i < map->capacity; i++){
+        tempLink = map->table[i];
+
+        //Copy each link over to the new map
+        while (tempLink != NULL){
+            hashMapPut(newMap, tempLink->key, tempLink->value);
+            tempLink = tempLink->next;
+        }
+    }
+
+    //Remove all the old links
+    hashMapCleanUp(map);
+    //Update the old map's values with the values from the new map
+    map->table = newMap->table;
+    map->size = newMap->size;
+    map->capacity = newMap->capacity;
+
+    //Now newMap's table and map's table are pointing to the same table.
+    //Set newMap's table to NULL so only map is pointing to table.
+    newMap->table = NULL;
+    //Now when we free newMap, we don't lose the table that map is pointing to.
+    free(newMap);
 }
 
 /**
