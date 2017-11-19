@@ -270,7 +270,7 @@ int hashMapContainsKey(HashMap* map, const char* key)
 int hashMapSize(HashMap* map)
 {
     // FIXME: implement
-    return 0;
+    return map->size;
 }
 
 /**
@@ -281,7 +281,7 @@ int hashMapSize(HashMap* map)
 int hashMapCapacity(HashMap* map)
 {
     // FIXME: implement
-    return 0;
+    return map->capacity;
 }
 
 /**
@@ -292,7 +292,13 @@ int hashMapCapacity(HashMap* map)
 int hashMapEmptyBuckets(HashMap* map)
 {
     // FIXME: implement
-    return 0;
+    int bucketCount = 0;
+    for (int i=0; i < map->capacity; i++){
+        if (map->table[i] == NULL){
+            bucketCount = bucketCount + 1;
+        }
+    }
+    return bucketCount;
 }
 
 /**
@@ -306,7 +312,10 @@ int hashMapEmptyBuckets(HashMap* map)
 float hashMapTableLoad(HashMap* map)
 {
     // FIXME: implement
-    return 0;
+    float mapSize = (float)map->size;
+    float mapCap = (float)map->capacity;
+    float load = mapSize/mapCap;
+    return load;
 }
 
 /**
