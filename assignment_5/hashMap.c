@@ -141,7 +141,7 @@ int* hashMapGet(HashMap* map, const char* key)
     HashLink* foundLink = map->table[hashKey];
 
     while (foundLink != NULL) {
-        if (foundLink->key == key) {
+        if (strcmp(foundLink->key, key) == 0){
             return &foundLink->value;
         }
         foundLink = foundLink->next;
@@ -181,7 +181,6 @@ void resizeTable(HashMap* map, int capacity)
     }
     //Remove all the old links
     hashMapCleanUp(map);
-    printf("make it here?\n");
     //Update the old map's values with the values from the new map
     map->table = newMap->table;
     map->size = newMap->size;
@@ -193,8 +192,6 @@ void resizeTable(HashMap* map, int capacity)
     newMap->table = NULL;
     //Now when we free newMap, we don't lose the table that map is pointing to.
     free(newMap);
-    printf("Capacity after resize: %d\n", map->capacity);
-
 }
 
 /**
@@ -244,9 +241,7 @@ void hashMapPut(HashMap* map, const char* key, int value)
         //check if you need to resize
         float currentLoad = hashMapTableLoad(map);
         if (currentLoad >= MAX_TABLE_LOAD){
-            printf("Capacity before resize is %d\n", map->capacity);
             resizeTable(map, 2 * map->capacity);
-            printf("Capacity after resize is %d\n", map->capacity);
         }
     }
 }
@@ -267,7 +262,7 @@ void hashMapRemove(HashMap* map, const char* key)
 
     if (linkIterator != NULL){
         //if the first link is the one we are looking for
-        if (linkIterator->key == key) {
+        if (strcmp(linkIterator->key, key) == 0){
             //set the first link to the next link
             map->table[mapLocation] = linkIterator->next;
         } else {
@@ -305,12 +300,14 @@ int hashMapContainsKey(HashMap* map, const char* key)
     }
 
     while (linkIterator != NULL){
-        if (linkIterator->key == key){
+        printf("linkIterator->key is %c and key is %c\n", *linkIterator->key, *key);
+        if (strcmp(key, linkIterator->key) == 0){
+            printf("gonna return a 1\n");
             return 1;
         }
         linkIterator = linkIterator->next;
     }
-
+    printf("gonna return a 0\n");
     return 0;
 }
 
