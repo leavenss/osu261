@@ -211,8 +211,6 @@ void hashMapPut(HashMap* map, const char* key, int value)
 {
     // FIXME: implement
 
-    printf("KVH: %c - %d - %d\n",*key, value, (HASH_FUNCTION(key)%map->capacity));
-
     if (key != NULL){
         int mapLocation = HASH_FUNCTION(key) % map->capacity;
         HashLink* linkIterator = map->table[mapLocation];
@@ -300,14 +298,11 @@ int hashMapContainsKey(HashMap* map, const char* key)
     }
 
     while (linkIterator != NULL){
-        printf("linkIterator->key is %c and key is %c\n", *linkIterator->key, *key);
         if (strcmp(key, linkIterator->key) == 0){
-            printf("gonna return a 1\n");
             return 1;
         }
         linkIterator = linkIterator->next;
     }
-    printf("gonna return a 0\n");
     return 0;
 }
 
