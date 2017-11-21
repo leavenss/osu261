@@ -1,8 +1,7 @@
-/*
- * CS 261 Data Structures
- * Assignment 5
- * Name: 
- * Date: 
+/* CS261- Assignment 5 - hashMap.c: Hashmap implementation.
+ * Name: Taylor Liss
+ * Date: 11/20/17
+ * Solution description: This is my implementation of a hashMap.
  */
 
 #include "hashMap.h"
