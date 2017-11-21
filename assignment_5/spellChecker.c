@@ -54,6 +54,12 @@ char* nextWord(FILE* file)
 void loadDictionary(FILE* file, HashMap* map)
 {
     // FIXME: implement
+    char* dictWord = nextWord(file);
+    while (dictWord != NULL){
+        hashMapPut(map, dictWord, 1);
+        free(dictWord);
+        dictWord = nextWord(file);
+    }
 }
 
 /**
@@ -68,29 +74,29 @@ int main(int argc, const char** argv)
 {
     // FIXME: implement
     HashMap* map = hashMapNew(1000);
-    
+
     FILE* file = fopen("dictionary.txt", "r");
     clock_t timer = clock();
     loadDictionary(file, map);
     timer = clock() - timer;
     printf("Dictionary loaded in %f seconds\n", (float)timer / (float)CLOCKS_PER_SEC);
     fclose(file);
-    
+
     char inputBuffer[256];
     int quit = 0;
     while (!quit)
     {
         printf("Enter a word or \"quit\" to quit: ");
         scanf("%s", inputBuffer);
-        
+
         // Implement the spell checker code here..
-        
+
         if (strcmp(inputBuffer, "quit") == 0)
         {
             quit = 1;
         }
     }
-    
+
     hashMapDelete(map);
     return 0;
 }
