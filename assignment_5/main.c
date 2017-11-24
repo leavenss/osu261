@@ -1,3 +1,9 @@
+/* CS261- Assignment 5 - main.c: Concordance implementation.
+ * Name: Taylor Liss
+ * Date: 11/20/17
+ * Solution description: This is my implementation of a concordance using a hashMap.
+ */
+
 #include "hashMap.h"
 #include <stdlib.h>
 #include <stdio.h>
