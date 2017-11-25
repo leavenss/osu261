@@ -137,7 +137,7 @@ int dfsIterative(Graph* graph, Vertex* source, Vertex* destination)
 
     Vertex *v;
     while (!dequeIsEmpty(c)){
-        //remove first entry from container c, assign to v
+        //remove first entry from container c (from the BACK), assign to v
         v = dequeBack(c);
         dequePopBack(c);
         v->isVisited = 1;
@@ -172,6 +172,37 @@ int dfsIterative(Graph* graph, Vertex* source, Vertex* destination)
 int bfsIterative(Graph* graph, Vertex* source, Vertex* destination)
 {
     // FIXME: Implement
+    clearVisited(graph);
+
+    if (source == destination) {
+        return 1;
+    }
+
+    // create container c, for vertices known to be reachable
+    Deque *c = dequeNew();
+    //add start vertex to container c
+    dequePushFront(c, source);
+
+    Vertex *v;
+    while (!dequeIsEmpty(c)) {
+        //remove first entry from container c (from the FRONT), assign to v
+        v = dequeFront(c);
+        dequePopFront(c);
+        v->isVisited = 1;
+        if (v == destination) {
+            return 1;
+        }
+
+        for (int i=0; i < v->numNeighbors; i++){
+            //if v is not already in the set of
+            //reachable vertices r
+            if (!(v->neighbors[i]->isVisited))
+                //add the neighbors of v, not already reachable
+                //to the container c
+                dequePushBack(c, v->neighbors[i]);
+        }
+    }
+    dequeDelete(c);
     return 0;
 }
 
