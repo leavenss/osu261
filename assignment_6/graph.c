@@ -1,8 +1,8 @@
-/*
- * CS 261 Data Structure
- * Assignment 6
- * Name: 
- * Date: 
+/* CS261- Assignment 6 - graph.c: BFS and DFS implementation
+ * Name: Taylor Liss
+ * Date: 11/24/17
+ * Solution description: This is my implementation of a breadth-first search
+ * and a depth-first search using a stack and queue data structure.
  */
 
 #include "graph.h"
